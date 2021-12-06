@@ -1,0 +1,6 @@
+psycopg2-binary
+requests
+pandas
+psycopg2
+datetime
+Pymongo

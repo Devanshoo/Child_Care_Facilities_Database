@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .text-div {
+            text-align: center;
+        }
+        p {
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-div">
+        <p>
+            Facility Name - <%= fac_name %>
+        </p>
+        <p>
+            Capacity Description - <%= capacity_data.capacity_description %>
+        </p>
+        <p>
+            Total Description- <%= capacity_data.total_capacity %>
+        </p>
+    
+        <h2>Child Welfare and Community Services Funded Programs in this region</h2>
+        <% if (mongo_data.length> 0) { %>
+            <table id="facility_table" border="1">
+                <tr>
+                    <th>Agency Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
+                    <th>Phone Number</th>
+                    <th>Counties Served</th>
+                    <th>Program Type</th>
+                    <th>Funding Source</th>
+                    <th>Program Description</th>
+                    <th>Contract Dates</th>
+                    <th>Website</th>
+                </tr>
+                <% for(var i=0; i < mongo_data.length; i++) {%>
+                    <tr class="table-row">
+                        <td><%= mongo_data[i].agency %></td>
+                        <td><%= mongo_data[i].address %></td>
+                        <td><%= mongo_data[i].city %></td>
+                        <td><%= mongo_data[i].state %></td>
+                        <td><%= mongo_data[i].zip %></td>
+                        <td><%= mongo_data[i].phone %></td>
+                        <td><%= mongo_data[i].counties_served %></td>
+                        <td><%= mongo_data[i].program_type %></td>
+                        <td><%= mongo_data[i].funding_source %></td>
+                        <td><%= mongo_data[i].program_description %></td>
+                        <td><%= mongo_data[i].contract_dates %></td>
+                        <td> <a href="<%= mongo_data[i].website.url %>"><%= mongo_data[i].website.url %></a></td>
+                    </tr>
+                <% } %>
+            </table>
+        <% } else { %>
+            <h3>No Welfare Data Found!</h3>
+        <% } %>
+    </div>
+
+</body>
+</html>

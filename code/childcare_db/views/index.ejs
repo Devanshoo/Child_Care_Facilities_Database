@@ -1,0 +1,262 @@
+<!-- index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Child Care</title>
+
+    <style>
+        .textbox {
+            width: 30%;
+        }
+        table {
+            margin-top: 20px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <h1>Welcome <%= username %></h1>
+
+    <form action="/facname" method="POST" class="facilitynameform">
+        <label for="facility_name1">Facility Name</label>
+        <input class="textbox facility_name" name="facility_name1"
+            placeholder="Enter a Facility Name to Search or Empty for All">
+        <button class="facility-form-submit" type="submit">Search</button>
+    </form>
+
+    <% if (facility_data.length> 0) { %>
+        <h2> Facility Data </h2>
+
+        <h4>Filter Options - </h4>
+
+        <form class="filter-form" action="/filter" method="POST">
+            <select id="prog_type_drop" class="dropdown program_type" name="program_type">
+                <option name="" value="">Select Program Type</option>
+                <option name="GFDC" value="GFDC">Group Family Day Care</option>
+                <option name="FDC" value="FDC">Family Day Care</option>
+                <option name="SACC" value="SACC">School Age Child Care</option>
+                <option name="DCC" value="DCC">Day Care Centre</option>
+                <option name="SDCC" value="SDCC">Small Day Care Centre</option>
+            </select>
+
+            <select id="facility_status_drop" class="dropdown facility_status" name="facility_status">
+                <option name="" value="">Select Facility Status</option>
+                <option name="License" value="License">License</option>
+                <option name="Pending Revocation" value="Pending Revocation">Pending Revocation</option>
+                <option name="Pending Revocation and Denial" value="Pending Revocation and Denial">Pending Revocation
+                    and Denial</option>
+                <option name="Registration" value="Registration">Registration</option>
+                <option name="Suspended" value="Suspended">Suspended</option>
+            </select>
+
+            <select id="county_drop" class="dropdown county" name="county">
+                <option name="" value="">Select County</option>
+                <option name="Albany" value="Albany">Albany</option>
+                <option name="Allegany" value="Allegany">Allegany</option>
+                <option name="Bronx" value="Bronx">Bronx</option>
+                <option name="Brooklyn" value="Brooklyn">Brooklyn</option>
+                <option name="Broome" value="Broome">Broome</option>
+                <option name="Cattaraugus" value="Cattaraugus">Cattaraugus</option>
+                <option name="Cayuga" value="Cayuga">Cayuga</option>
+                <option name="Chautauqua" value="Chautauqua">Chautauqua</option>
+                <option name="Chemung" value="Chemung">Chemung</option>
+                <option name="Chenango" value="Chenango">Chenango</option>
+                <option name="Clinton" value="Clinton">Clinton</option>
+                <option name="Columbia" value="Columbia">Columbia</option>
+                <option name="Cortland" value="Cortland">Cortland</option>
+                <option name="Delaware" value="Delaware">Delaware</option>
+                <option name="Dutchess" value="Dutchess">Dutchess</option>
+                <option name="Erie" value="Erie">Erie</option>
+                <option name="Essex" value="Essex">Essex</option>
+                <option name="Franklin" value="Franklin">Franklin</option>
+                <option name="Fulton" value="Fulton">Fulton</option>
+                <option name="Genesee" value="Genesee">Genesee</option>
+                <option name="Greene" value="Greene">Greene</option>
+                <option name="Lawrence" value="Hamilton. Lawrence">Hamilton. Hamilton</option>
+                <option name="Herkimer" value="Herkimer">Herkimer</option>
+                <option name="Jefferson" value="Jefferson">Jefferson</option>
+                <option name="Lewis" value="Lewis">Lewis</option>
+                <option name="Livingston" value="Livingston">Livingston</option>
+                <option name="Madison" value="Madison">Madison</option>
+                <option name="Manhattan" value="Manhattan">Manhattan</option>
+                <option name="Monroe" value="Monroe">Monroe</option>
+                <option name="Montgomery" value="Montgomery">Montgomery</option>
+                <option name="Nassau" value="Nassau">Nassau</option>
+                <option name="Niagara" value="Niagara">Niagara</option>
+                <option name="Oneida" value="Oneida">Oneida</option>
+                <option name="Onondaga" value="Onondaga">Onondaga</option>
+                <option name="Ontario" value="Ontario">Ontario</option>
+                <option name="Orange" value="Orange">Orange</option>
+                <option name="Orleans" value="Orleans">Orleans</option>
+                <option name="Oswego" value="Oswego">Oswego</option>
+                <option name="Otsego" value="Otsego">Otsego</option>
+                <option name="Putnam" value="Putnam">Putnam</option>
+                <option name="Queens" value="Queens">Queens</option>
+                <option name="Rensselaer" value="Rensselaer">Rensselaer</option>
+                <option name="Rockland" value="Rockland">Rockland</option>
+                <option name="Saratoga" value="Saratoga">Saratoga</option>
+                <option name="Schenectady" value="Schenectady">Schenectady</option>
+                <option name="Schoharie" value="Schoharie">Schoharie</option>
+                <option name="Schuyler" value="Schuyler">Schuyler</option>
+                <option name="Seneca" value="Seneca">Seneca</option>
+                <option name="St. Lawrence" value="St. Lawrence">St. Lawrence</option>
+                <option name="Staten Island" value="Staten Island">Staten Island</option>
+                <option name="Steuben" value="Steuben">Steuben</option>
+                <option name="Suffolk" value="Suffolk">Suffolk</option>
+                <option name="Sullivan" value="Sullivan">Sullivan</option>
+                <option name="Tioga" value="Tioga">Tioga</option>
+                <option name="Tompkins" value="Tompkins">Tompkins</option>
+                <option name="Ulster" value="Ulster">Ulster</option>
+                <option name="Warren" value="Warren">Warren</option>
+                <option name="Washington" value="Washington">Washington</option>
+                <option name="Wayne" value="Wayne">Wayne</option>
+                <option name="Westchester" value="Westchester">Westchester</option>
+                <option name="Wyoming" value="Wyoming">Wyoming</option>
+                <option name="Yates" value="Yates">Yates</option>
+            </select>
+            
+            <input
+            type="text"
+            placeholder="Type City Name here to Filter"
+            name="city"
+            style="width: 180px;"
+            />
+            
+
+            <button class="filter-table">Filter</button>
+        </form>
+
+        <table id="facility_table" border="1">
+            <tr>
+                <th>Facilty Name</th>
+                <th>Facilty Status</th>
+                <th>Program Type</th>
+                <th>Facilty Opened Date</th>
+                <th>Provider Name</th>
+                <th>Region Code</th>
+                <th>County</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+                <th>Phone Number</th>
+                <th>Additional Information</th>
+            </tr>
+            <% for(var i=0; i < facility_data.length; i++) {%>
+                <tr class="table-row">
+                    <td>
+                        <a href="/details/<%= facility_data[i].facility_id %>">
+                            <%= facility_data[i].facility_name %>
+                        </a>
+                    </td>
+                    <td>
+                        <%= facility_data[i].facility_status %>
+                    </td>
+                    <td>
+                        <%= facility_data[i].program_full_name %>
+                    </td>
+                    <td>
+                        <%= (facility_data[i].facility_opened_date).toLocaleString("en-GB", { day: "numeric" ,
+                            month: "short" , year: "numeric" , }) %>
+                    </td>
+                    <td>
+                        <%= facility_data[i].provider_name %>
+                    </td>
+                    <td>
+                        <%= facility_data[i].region_code%>
+                    </td>
+                    <td>
+                        <%= facility_data[i].county %>
+                    </td>
+                    <td>
+                        <%= facility_data[i].city %>
+                    </td>
+                    <td>
+                        <%= facility_data[i].state %>
+                    </td>
+                    <td>
+                        <%= facility_data[i].zip_code %>
+                    </td>
+                    <td>
+                        <%= facility_data[i].phone_number %>
+                    </td>
+                    <td>
+                        <a href="<%= facility_data[i].additional_information %>" target="blank_">
+                            <%= facility_data[i].additional_information %>
+                        </a>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+        <% } %>
+</body>
+
+<script>
+    $('button.facility-form-submit').click(function () {
+        $('form.facilitynameform').submit();
+    });
+
+    $('button.filter-table').click(function () {
+        $('form.filter-form').submit();
+    })
+
+    function filterButtonClick() {
+        event.preventDefault()
+        resetTable();
+        var table = document.getElementById('facility_table');
+        var program_type_select = document.getElementById("prog_type_drop");
+        var selectedProgramType = program_type_select.options[program_type_select.selectedIndex].text;
+
+        var county_select = document.getElementById("county_drop");
+        var selectedCounty = county_select.options[county_select.selectedIndex].text;
+
+        var facility_status_select = document.getElementById("facility_status_drop");
+        var selectedFacilityStatus = facility_status_select.options[facility_status_select.selectedIndex].text;
+
+        for (var i = 1, row; row = table.rows[i]; i++) {
+
+            if (selectedFacilityStatus === 'Select Facility Status') {
+                if (selectedProgramType === 'Select Program Type') {
+                    resetTable();
+                }
+                else if (row.cells[2].innerText.trim() !== selectedProgramType.trim()) {
+                    row.style.display = 'none'
+                }
+            }
+
+            else if (selectedProgramType === 'Select Program Type') {
+                if (row.cells[1].innerText.trim() !== selectedFacilityStatus.trim()) {
+                    row.style.display = 'none'
+                }
+            }
+
+            else if (row.cells[1].innerText.trim() !== selectedFacilityStatus.trim() || row.cells[2].innerText.trim() !== selectedProgramType.trim()) {
+                row.style.display = 'none'
+            }
+        }
+    }
+
+    function resetTable() {
+        var table = document.getElementById('facility_table');
+        for (var i = 1, row; row = table.rows[i]; i++) {
+            for (var j = 0, col; col = row.cells[j]; j++) {
+                row.style.display = 'table-row';
+            }
+        }
+    }
+
+    document.querySelector('.filter-table').addEventListener("click", function (event) {
+        event.preventDefault()
+        filterButtonClick()
+    })
+
+    function handleTableClick(element) {
+        var facility_name = element.cells[0].innerText;
+
+    }
+
+</script>
+
+</html>
